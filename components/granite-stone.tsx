@@ -17,9 +17,14 @@ import {
 import { Environment } from "@react-three/drei";
 import * as THREE from "three";
 import {
+    ARRIVE_END,
+    INTRO_FADE_START,
     LAYOUT_POSE,
+    lerp,
     MOBILE_POSE,
     morphWeightsAt,
+    remap,
+    smoothstep,
     stonePoseAt,
 } from "@/lib/hero-story";
 
@@ -295,7 +300,7 @@ function Boulder({
         const s = smoothProgress.current;
 
         const pose = isMobile
-            ? stonePoseAt(s, { intro: LAYOUT_POSE.intro, start: MOBILE_POSE, end: MOBILE_POSE })
+            ? stonePoseAt(s, { intro: LAYOUT_POSE.intro, end: MOBILE_POSE })
             : stonePoseAt(s, LAYOUT_POSE);
 
         groupRef.current.position.set(
@@ -353,6 +358,81 @@ function Boulder({
     );
 }
 
+// Base intensities for each light, at full brightness (reached once the
+// stone arrives at its Phase 1 pose).
+const AMBIENT_INTENSITY = 0.8;
+const KEY_LIGHT_INTENSITY = 4;
+const FILL_LIGHT_INTENSITY = 2;
+const POINT_LIGHT_INTENSITY = 1;
+
+// How dim the stone is before any scroll, as a fraction of full brightness.
+const INTRO_DIM_FACTOR = 0.4;
+
+function Lighting({ progress }: { progress: MutableRefObject<number> }) {
+    const ambientRef = useRef<THREE.AmbientLight>(null);
+    const keyLightRef = useRef<THREE.DirectionalLight>(null);
+    const fillLightRef = useRef<THREE.DirectionalLight>(null);
+    const pointLightRef = useRef<THREE.PointLight>(null);
+    const smoothProgress = useRef(0);
+
+    const reducedMotion = useReducedMotion();
+
+    useFrame((state, delta) => {
+        smoothProgress.current = reducedMotion
+            ? 1
+            : THREE.MathUtils.lerp(
+                  smoothProgress.current,
+                  progress.current,
+                  Math.min(1, delta * 3.5),
+              );
+
+        const arrived = smoothstep(
+            remap(smoothProgress.current, INTRO_FADE_START, ARRIVE_END),
+        );
+        const brightness = lerp(INTRO_DIM_FACTOR, 1, arrived);
+
+        if (ambientRef.current) {
+            ambientRef.current.intensity = AMBIENT_INTENSITY * brightness;
+        }
+
+        if (keyLightRef.current) {
+            keyLightRef.current.intensity = KEY_LIGHT_INTENSITY * brightness;
+        }
+
+        if (fillLightRef.current) {
+            fillLightRef.current.intensity = FILL_LIGHT_INTENSITY * brightness;
+        }
+
+        if (pointLightRef.current) {
+            pointLightRef.current.intensity = POINT_LIGHT_INTENSITY * brightness;
+        }
+    });
+
+    return (
+        <>
+            <ambientLight ref={ambientRef} intensity={AMBIENT_INTENSITY * INTRO_DIM_FACTOR} />
+
+            <directionalLight
+                ref={keyLightRef}
+                position={[5, 6, 5]}
+                intensity={KEY_LIGHT_INTENSITY * INTRO_DIM_FACTOR}
+            />
+
+            <directionalLight
+                ref={fillLightRef}
+                position={[-4, 2, 3]}
+                intensity={FILL_LIGHT_INTENSITY * INTRO_DIM_FACTOR}
+            />
+
+            <pointLight
+                ref={pointLightRef}
+                position={[0, -2, 4]}
+                intensity={POINT_LIGHT_INTENSITY * INTRO_DIM_FACTOR}
+            />
+        </>
+    );
+}
+
 export default function GraniteStone({
     progress,
 }: {
@@ -374,19 +454,7 @@ export default function GraniteStone({
                 }}
                 dpr={[1, 1.75]}
             >
-                <ambientLight intensity={0.8} />
-
-                <directionalLight
-                    position={[5, 6, 5]}
-                    intensity={4}
-                />
-
-                <directionalLight
-                    position={[-4, 2, 3]}
-                    intensity={2}
-                />
-
-                <pointLight position={[0, -2, 4]} intensity={1} />
+                <Lighting progress={progress} />
 
                 <Suspense fallback={null}>
                     <Boulder progress={progress} />

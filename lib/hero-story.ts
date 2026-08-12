@@ -39,48 +39,51 @@ export const LAYOUT_POSE: { intro: StonePose; end: StonePose } = {
 
 // Below the mobile breakpoint there is no "right side" to travel to: the
 // stone stays small and pinned near the top while text stacks underneath.
-export const MOBILE_POSE: StonePose = { fracX: 0.5, fracY: 0.13, scale: 0.3 };
+export const MOBILE_POSE: StonePose = { fracX: 0.5, fracY: 0.37, scale: 0.3 };
 
-export const PHASES: StoryPhase[] = [
+export const PHASES = [
     {
         id: "formed",
-        eyebrow: "PHASE 01 / FORMATION",
-        title: "Born under pressure",
-        body: "Formed over millions of years, compressed deep within the earth's crust under immense heat and pressure.",
+        eyebrow: "FASE 01 / ORIGEM",
+        title: "Nascida sob pressão",
+        body: "Milhões de anos de tempo, calor e pressão deram origem a uma matéria que não se fabrica. Na Sotragran, acreditamos que cada pedra começa a contar a sua história muito antes de chegar às nossas mãos.",
         enter: 0.15,
         holdStart: 0.19,
         holdEnd: 0.3,
         exit: 0.34,
     },
+
     {
         id: "quarried",
-        eyebrow: "PHASE 02 / EXTRACTION",
-        title: "Cut from the earth",
-        body: "Extracted in solid blocks, true to its raw origin — never manufactured, only revealed.",
+        eyebrow: "FASE 02 / EXTRAÇÃO",
+        title: "Da terra para as nossas mãos",
+        body: "É na sua forma mais pura que a pedra revela a sua verdadeira identidade. A Sotragran, fundada em 1990 em Oliveira do Hospital, trabalha o granito desde a matéria-prima, preservando aquilo que a natureza criou.",
         enter: 0.36,
         holdStart: 0.4,
         holdEnd: 0.51,
         exit: 0.55,
     },
+
     {
         id: "revealed",
-        eyebrow: "PHASE 03 / REVELATION",
-        title: "Polished to truth",
-        body: "Cut, cross-sectioned, and polished until the stone finally reveals its truest face.",
+        eyebrow: "FASE 03 / TRANSFORMAÇÃO",
+        title: "Revelar o que já estava lá",
+        body: "Cortar, serrar, amaciar, polir. Cada transformação revela uma nova face da pedra. É aqui que a experiência da Sotragran encontra a matéria, através de diferentes acabamentos pensados para cada projecto.",
         enter: 0.57,
         holdStart: 0.61,
         holdEnd: 0.72,
         exit: 0.76,
     },
+
     {
         id: "applied",
-        eyebrow: "PHASE 04 / APPLICATION",
-        title: "Ready for the space",
-        body: "From quarry to countertop — the same stone, now shaped for the rooms people live in.",
+        eyebrow: "FASE 04 / APLICAÇÃO",
+        title: "Da pedra ao espaço",
+        body: "Uma bancada. Um degrau. Um revestimento. Um detalhe que permanece. A Sotragran transforma granito em soluções para construção e arquitectura, levando a pedra desde Oliveira do Hospital até aos espaços onde ganha uma nova vida.",
         enter: 0.78,
         holdStart: 0.82,
-        holdEnd: 0.92,
-        exit: 0.92,
+        holdEnd: 0.93,
+        exit: 0.97,
     },
 ];
 
@@ -164,19 +167,19 @@ function lerpPose(a: StonePose, b: StonePose, t: number): StonePose {
 
 export function stonePoseAt(
     progress: number,
-    pose: { intro: StonePose; start: StonePose; end: StonePose } = LAYOUT_POSE,
+    pose: { intro: StonePose; end: StonePose } = LAYOUT_POSE,
 ): StonePose {
     if (progress <= INTRO_FADE_START) {
         return pose.intro;
     }
 
-    if (progress < INTRO_END) {
-        const t = smoothstep(remap(progress, INTRO_FADE_START, INTRO_END));
+    if (progress < ARRIVE_END) {
+        const t = smoothstep(remap(progress, INTRO_FADE_START, ARRIVE_END));
 
-        return lerpPose(pose.intro, pose.start, t);
+        return lerpPose(pose.intro, pose.end, t);
     }
 
-    return lerpPose(pose.start, pose.end, remap(progress, INTRO_END, ARRIVE_END));
+    return pose.end;
 }
 
 export function morphWeightsAt(progress: number) {

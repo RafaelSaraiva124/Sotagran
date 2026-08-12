@@ -134,14 +134,14 @@ export default function Hero() {
             <section id="hero-story" className="relative bg-quarry">
                 <div className="flex flex-col items-center justify-center px-6 py-28 text-center">
                     <span className="survey-label mb-6">
-                        NATURAL STONE / SPECIMEN 01
+                           PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </span>
-
                     <h1 className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white md:text-[8vw]">
-                        Stone
+                        Nascida
                         <br />
-                        <span className="italic text-stone">shaped</span>{" "}
-                        by nature
+                        <span className="italic text-stone text-shadow-lg">
+                                para permanecer.
+                        </span>
                     </h1>
                 </div>
 
@@ -210,21 +210,22 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="survey-label mb-6"
+                        className="survey-label mb-6 "
                     >
-                        NATURAL STONE / SPECIMEN 01
+                        PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </motion.span>
 
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.35 }}
-                        className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white md:text-[8vw]"
+                        className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white text-shadow-lg md:text-[8vw]"
                     >
-                        Stone
+                        Nascida
                         <br />
-                        <span className="italic text-stone">shaped</span>{" "}
-                        by nature
+                        <span className="italic text-stone text-shadow-lg ">
+        para permanecer.
+    </span>
                     </motion.h1>
 
                     <motion.a
@@ -278,12 +279,12 @@ export default function Hero() {
                     className="pointer-events-none absolute inset-x-0 bottom-12 z-30 flex justify-center text-center opacity-0"
                 >
                     <div>
-                        <span className="survey-label text-warm-white/70">
-                            MATERIAL / 01
+                    <span className="survey-label text-warm-white/70">
+                         PEDRA NATURAL
                         </span>
 
                         <p className="mt-3 font-mono text-xs uppercase tracking-[0.25em] text-warm-white">
-                            Black Granite · Polished
+                            Oliveira do Hospital · Portugal
                         </p>
                     </div>
                 </div>
