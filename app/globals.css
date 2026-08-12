@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+    /* ─────────────────────────────────────────
+       SOTRAGRAN — COLOR SYSTEM
+       ───────────────────────────────────────── */
+
+    --color-quarry: #080808;
+    --color-charcoal: #111111;
+
+    --color-stone: #d6d2c8;
+    --color-warm-white: #f3f1ec;
+    --color-graphite: #6e6b65;
+    --color-mica: #aaa59a;
+
+    /* Accent */
+    --color-copper: #b8896b;
+
+    /* ─────────────────────────────────────────
+       TYPOGRAPHY
+       ───────────────────────────────────────── */
+
+    --font-body: var(--font-geist-sans);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+
+/* ─────────────────────────────────────────
+   ROOT
+   ───────────────────────────────────────── */
+
+:root {
+    --border: 220 8% 30%;
+    --background: 60 9% 89%;
+    --foreground: 210 6% 15%;
+}
+
+
+/* ─────────────────────────────────────────
+   GLOBAL
+   ───────────────────────────────────────── */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-quarry text-graphite font-body antialiased;
+
+    margin: 0;
+}
+
+
+/* ─────────────────────────────────────────
+   ACCESSIBILITY / REDUCED MOTION
+   ───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ─────────────────────────────────────────
+   SURVEY LABEL
+   Technical survey-style eyebrow label
+   ───────────────────────────────────────── */
+
+.survey-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.25em] text-mica;
+}
+
+
+/* ─────────────────────────────────────────
+   SURVEY RULE
+   ───────────────────────────────────────── */
+
+.survey-rule {
+    @apply relative;
+}
+
+.survey-rule::before,
+.survey-rule::after {
+    content: "";
+
+    @apply absolute h-2 w-2 border-mica;
+}
+
+.survey-rule::before {
+    @apply top-0 left-0 border-t border-l;
+}
+
+.survey-rule::after {
+    @apply right-0 bottom-0 border-r border-b;
+}
+
+
+/* ─────────────────────────────────────────
+   TEXT SELECTION
+   ───────────────────────────────────────── */
+
+::selection {
+    background: #b8896b;
+    color: #15171a;
+}
