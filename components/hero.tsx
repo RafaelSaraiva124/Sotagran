@@ -232,10 +232,10 @@ export default function Hero() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.8 }}
-                        href="#origin"
-                        className="pointer-events-auto mt-12 border-b border-warm-white/40 pb-2 font-mono text-xs uppercase tracking-[0.25em] text-warm-white transition-colors hover:border-stone hover:text-stone"
+                        href="#materials"
+                        className="pointer-events-auto mt-12 border-b border-warm-white/40 pt-15 pb-2 font-mono text-xs uppercase tracking-[0.25em] text-warm-white transition-colors hover:border-stone hover:text-stone"
                     >
-                        Discover the story
+                        Ver Catálogo
                     </motion.a>
                 </div>
 
@@ -243,7 +243,7 @@ export default function Hero() {
                     <div
                         key={phase.id}
                         id={`phase-${phase.id}`}
-                        className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-center px-6 opacity-0 md:px-16"
+                        className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-end px-6 pb-28 opacity-0 md:justify-center md:px-16 md:pb-0"
                     >
                         <div className="max-w-xl text-left md:max-w-[46%]">
                             <span className="survey-label mb-5 text-warm-white/70">

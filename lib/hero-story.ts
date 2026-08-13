@@ -14,32 +14,24 @@ export type StoryPhase = {
     exit: number;
 };
 
-// Progress at which the centered intro title starts fading out.
 export const INTRO_FADE_START = 0.05;
 
-// Progress at which the centered intro title has fully faded and the stone
-// has finished traveling from its centered/intro pose to its top/small one;
-// from here it starts traveling on toward the right/large pose.
+
 export const INTRO_END = 0.15;
 
-// Progress at which the stone has fully arrived at its right-side pose.
 export const ARRIVE_END = 0.2;
 
 export type StonePose = { fracX: number; fracY: number; scale: number };
 
-// fracX/fracY are screen-space fractions (0 = left/top, 1 = right/bottom);
-// scale is relative to the stone's own resting radius. Two keyframes: the
-// centered/normal pose visitors see before any scroll (matching today's
-// look), and the pose it holds for Phase 1 onward — the stone travels
-// straight there, with no intermediate stop at the top.
+
 export const LAYOUT_POSE: { intro: StonePose; end: StonePose } = {
     intro: { fracX: 0.5, fracY: 0.42, scale: 0.6 },
     end: { fracX: 0.76, fracY: 0.46, scale: 0.85 },
 };
 
-// Below the mobile breakpoint there is no "right side" to travel to: the
-// stone stays small and pinned near the top while text stacks underneath.
+
 export const MOBILE_POSE: StonePose = { fracX: 0.5, fracY: 0.37, scale: 0.3 };
+
 
 export const PHASES = [
     {
@@ -47,10 +39,10 @@ export const PHASES = [
         eyebrow: "FASE 01 / ORIGEM",
         title: "Nascida sob pressão",
         body: "Milhões de anos de tempo, calor e pressão deram origem a uma matéria que não se fabrica. Na Sotragran, acreditamos que cada pedra começa a contar a sua história muito antes de chegar às nossas mãos.",
-        enter: 0.15,
-        holdStart: 0.19,
-        holdEnd: 0.3,
-        exit: 0.34,
+        enter: 0.2,
+        holdStart: 0.25,
+        holdEnd: 0.38,
+        exit: 0.43,
     },
 
     {
@@ -58,10 +50,10 @@ export const PHASES = [
         eyebrow: "FASE 02 / EXTRAÇÃO",
         title: "Da terra para as nossas mãos",
         body: "É na sua forma mais pura que a pedra revela a sua verdadeira identidade. A Sotragran, fundada em 1990 em Oliveira do Hospital, trabalha o granito desde a matéria-prima, preservando aquilo que a natureza criou.",
-        enter: 0.36,
-        holdStart: 0.4,
-        holdEnd: 0.51,
-        exit: 0.55,
+        enter: 0.38,
+        holdStart: 0.43,
+        holdEnd: 0.56,
+        exit: 0.61,
     },
 
     {
@@ -69,10 +61,10 @@ export const PHASES = [
         eyebrow: "FASE 03 / TRANSFORMAÇÃO",
         title: "Revelar o que já estava lá",
         body: "Cortar, serrar, amaciar, polir. Cada transformação revela uma nova face da pedra. É aqui que a experiência da Sotragran encontra a matéria, através de diferentes acabamentos pensados para cada projecto.",
-        enter: 0.57,
+        enter: 0.56,
         holdStart: 0.61,
-        holdEnd: 0.72,
-        exit: 0.76,
+        holdEnd: 0.74,
+        exit: 0.79,
     },
 
     {
@@ -80,23 +72,21 @@ export const PHASES = [
         eyebrow: "FASE 04 / APLICAÇÃO",
         title: "Da pedra ao espaço",
         body: "Uma bancada. Um degrau. Um revestimento. Um detalhe que permanece. A Sotragran transforma granito em soluções para construção e arquitectura, levando a pedra desde Oliveira do Hospital até aos espaços onde ganha uma nova vida.",
-        enter: 0.78,
-        holdStart: 0.82,
-        holdEnd: 0.93,
+        enter: 0.74,
+        holdStart: 0.79,
+        holdEnd: 0.92,
         exit: 0.97,
     },
 ];
 
-// Morph target weights ramp across these windows, bracketing the text
-// transition they correspond to: the shape visibly changes exactly as the
-// words describing that change enter and exit.
+
 export const MORPH = {
-    toQuarried: { start: 0.3, end: 0.4 },
-    toPolished: { start: 0.52, end: 0.62 },
+    toQuarried: { start: 0.38, end: 0.43 },
+    toPolished: { start: 0.56, end: 0.61 },
 };
 
-export const PHOTO_CROSSFADE = { start: 0.77, end: 0.79 };
-export const OUTRO_FADE = { start: 0.94, end: 1 };
+export const PHOTO_CROSSFADE = { start: 0.74, end: 0.79 };
+export const OUTRO_FADE = { start: 0.92, end: 1 };
 
 export function clamp01(value: number) {
     return value < 0 ? 0 : value > 1 ? 1 : value;
@@ -114,9 +104,7 @@ export function lerp(a: number, b: number, t: number) {
     return a + (b - a) * t;
 }
 
-// Ease-in-out curve (0 and 1 stay fixed, midpoint accelerates then
-// decelerates) so a transition reads as smooth motion rather than a linear
-// slide.
+
 export function smoothstep(t: number) {
     return t * t * (3 - 2 * t);
 }
@@ -127,11 +115,11 @@ export function phaseOpacity(progress: number, phase: StoryPhase) {
     }
 
     if (progress < phase.holdStart) {
-        return remap(progress, phase.enter, phase.holdStart);
+        return smoothstep(remap(progress, phase.enter, phase.holdStart));
     }
 
     if (progress > phase.holdEnd) {
-        return 1 - remap(progress, phase.holdEnd, phase.exit);
+        return 1 - smoothstep(remap(progress, phase.holdEnd, phase.exit));
     }
 
     return 1;
@@ -147,11 +135,11 @@ export function phaseOffsetY(progress: number, phase: StoryPhase) {
     }
 
     if (progress < phase.holdStart) {
-        return lerp(40, 0, remap(progress, phase.enter, phase.holdStart));
+        return lerp(40, 0, smoothstep(remap(progress, phase.enter, phase.holdStart)));
     }
 
     if (progress > phase.holdEnd) {
-        return lerp(0, -40, remap(progress, phase.holdEnd, phase.exit));
+        return lerp(0, -40, smoothstep(remap(progress, phase.holdEnd, phase.exit)));
     }
 
     return 0;
