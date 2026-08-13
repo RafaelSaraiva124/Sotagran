@@ -1,8 +1,3 @@
-// Shared scroll-progress timing config for the hero storytelling sequence.
-// Both hero.tsx (text + photo crossfade) and granite-stone.tsx (3D pose + shape
-// morph) read the SAME boundaries here, so nothing drifts out of sync.
-// progress is always the hero section's own scroll fraction, 0 to 1.
-
 export type StoryPhase = {
     id: string;
     eyebrow: string;

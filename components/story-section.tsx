@@ -5,12 +5,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface StorySectionProps {
-  index: string; // "01"
-  coordinate: string; // survey-style label, e.g. "STRATA 03"
-  eyebrow: string; // "ORIGIN"
+  index: string;
+  coordinate: string;
+  eyebrow: string;
   title: ReactNode;
   children?: ReactNode;
-  media?: ReactNode; // image / video / grid filling the background layer
+  media?: ReactNode;
   tone?: "dark" | "light";
   className?: string;
 }
@@ -31,7 +31,6 @@ export default function StorySection({
     offset: ["start end", "end start"],
   });
 
-  // Background media drifts slower than the viewport → parallax.
   const mediaY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.3], [40, 0]);

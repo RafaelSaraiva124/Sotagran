@@ -59,7 +59,6 @@ function fbm(v: THREE.Vector3) {
     return value;
 }
 
-// Phase 1 / Formation: rough, organic, irregular — today's noise displaced shape.
 function displaceRaw(vertex: THREE.Vector3) {
     const normal = vertex.clone().normalize();
 
@@ -80,10 +79,6 @@ function displaceRaw(vertex: THREE.Vector3) {
     return vertex;
 }
 
-// Maps a point on the unit sphere onto the surface of a unit cube (the
-// standard sphere<->cube warp used for cube-mapped terrain), so a sphere-like
-// mesh can be reshaped into a squared-off block while keeping one vertex per
-// input normal — required for morph targets to line up vertex by vertex.
 function cubify(normal: THREE.Vector3) {
     const x2 = normal.x * normal.x;
     const y2 = normal.y * normal.y;
@@ -96,10 +91,6 @@ function cubify(normal: THREE.Vector3) {
     );
 }
 
-// Phase 2 / Extraction: a rough-cut block — the sphere warped onto a cube's
-// surface so it reads as squared-off, then roughened with stepped + fine
-// noise so the faces aren't perfectly flat, like a freshly quarried block
-// before polishing.
 function displaceQuarried(vertex: THREE.Vector3) {
     const normal = vertex.clone().normalize();
     const radius = vertex.length();
@@ -117,9 +108,6 @@ function displaceQuarried(vertex: THREE.Vector3) {
     return vertex;
 }
 
-// Phase 3+ / Revelation & Application: a polished slab — the same cube warp
-// as displaceQuarried, flattened into a thin rectangular slab and left
-// almost perfectly smooth (a hint of noise so it doesn't look synthetic).
 function displacePolished(vertex: THREE.Vector3) {
     const normal = vertex.clone().normalize();
     const radius = vertex.length();
@@ -170,10 +158,6 @@ function normalsFor(positions: Float32Array) {
     return normals;
 }
 
-// Builds one geometry whose raw (Formation), quarried (Extraction), and
-// polished (Revelation/Application) shapes all come from the same base
-// icosahedron vertex buffer, same count and order, so the two non-base
-// shapes register as three.js morph targets and blend vertex by vertex.
 function buildGraniteGeometry() {
     const geometry = new THREE.IcosahedronGeometry(1.45, DETAIL);
     const template = (geometry.attributes.position as THREE.BufferAttribute).clone();
@@ -257,8 +241,6 @@ function Boulder({
         "/media/materials/granite-black.jpg",
     );
 
-    // useLoader's returned texture must not be mutated directly; configure a
-    // clone constructed fresh here instead.
     const texture = useMemo(() => {
         const configured = rawTexture.clone();
 
@@ -272,9 +254,6 @@ function Boulder({
         return configured;
     }, [rawTexture]);
 
-    // Mesh.updateMorphTargets() only runs from the THREE.Mesh constructor, not
-    // when a geometry with morphAttributes is assigned afterward (as R3F does
-    // here), so morphTargetInfluences would stay undefined without this.
     useLayoutEffect(() => {
         if (meshRef.current) {
             meshRef.current.morphTargetInfluences = [0, 0];
@@ -291,9 +270,6 @@ function Boulder({
             : THREE.MathUtils.lerp(
                   smoothProgress.current,
                   progress.current,
-                  // Clamped to 1: MathUtils.lerp doesn't clamp its own alpha, so a
-                  // large delta (a tab backgrounded and resumed) would otherwise
-                  // overshoot past the actual scroll target instead of snapping to it.
                   Math.min(1, delta * 3.5),
               );
 
@@ -358,14 +334,11 @@ function Boulder({
     );
 }
 
-// Base intensities for each light, at full brightness (reached once the
-// stone arrives at its Phase 1 pose).
 const AMBIENT_INTENSITY = 0.8;
 const KEY_LIGHT_INTENSITY = 4;
 const FILL_LIGHT_INTENSITY = 2;
 const POINT_LIGHT_INTENSITY = 1;
 
-// How dim the stone is before any scroll, as a fraction of full brightness.
 const INTRO_DIM_FACTOR = 0.4;
 
 function Lighting({ progress }: { progress: MutableRefObject<number> }) {

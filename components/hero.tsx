@@ -68,10 +68,6 @@ export default function Hero() {
         const ctx = gsap.context(() => {
           try {
             const st = ScrollTrigger.create({
-                // A plain element reference, not a "#hero-story" selector string:
-                // gsap.context scopes string selectors to search WITHIN rootRef,
-                // and rootRef's own element (the scope root) is never a match for
-                // its own id selector, so the trigger silently failed to resolve.
                 trigger: rootRef.current,
                 start: "top top",
                 end: "bottom bottom",
@@ -133,13 +129,13 @@ export default function Hero() {
         return (
             <section id="hero-story" className="relative bg-quarry">
                 <div className="flex flex-col items-center justify-center px-6 py-28 text-center">
-                    <span className="survey-label mb-6">
+                    <span className="survey-label mb-6 text-warm-white">
                            PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </span>
                     <h1 className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white md:text-[8vw]">
                         Nascida
                         <br />
-                        <span className="italic text-stone text-shadow-lg">
+                        <span className="font-display italic text-stone text-shadow-lg">
                                 para permanecer.
                         </span>
                     </h1>
@@ -153,7 +149,7 @@ export default function Hero() {
                                     {phase.eyebrow}
                                 </span>
 
-                                <h2 className="max-w-md text-3xl leading-tight tracking-[-0.02em] text-warm-white md:text-4xl">
+                                <h2 className="font-display max-w-md text-3xl leading-tight tracking-[-0.02em] text-warm-white md:text-4xl">
                                     {phase.title}
                                 </h2>
 
@@ -210,7 +206,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="survey-label mb-6 "
+                        className="survey-label mb-6 text-warm-white mix-blend-difference"
                     >
                         PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </motion.span>
@@ -223,7 +219,7 @@ export default function Hero() {
                     >
                         Nascida
                         <br />
-                        <span className="italic text-stone text-shadow-lg ">
+                        <span className="font-display italic text-stone text-shadow-lg ">
         para permanecer.
     </span>
                     </motion.h1>
@@ -250,7 +246,7 @@ export default function Hero() {
                                 {phase.eyebrow}
                             </span>
 
-                            <h2 className="text-[9vw] leading-[0.9] tracking-[-0.03em] text-warm-white md:text-[4.5vw]">
+                            <h2 className="font-display text-[9vw] leading-[0.9] tracking-[-0.03em] text-warm-white md:text-[4.5vw]">
                                 {phase.title}
                             </h2>
 
@@ -267,7 +263,7 @@ export default function Hero() {
                 >
                     <div className="flex flex-col items-center gap-3 text-warm-white/60">
                         <span className="font-mono text-[9px] uppercase tracking-[0.3em]">
-                            Scroll
+                            Deslize
                         </span>
 
                         <span className="animate-bounce text-lg">↓</span>
