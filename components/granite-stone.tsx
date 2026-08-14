@@ -25,10 +25,6 @@ import {
     stonePoseAt,
 } from "@/lib/hero-story";
 
-/* ============================================================
-   TUNING
-   ============================================================ */
-
 const DETAIL = 36;              // icosphere subdivision (silhouette quality)
 const MOBILE_BREAKPOINT = 768;
 const BASE_RADIUS = 1.45;
@@ -223,10 +219,6 @@ function smoothstepLocal(edge0: number, edge1: number, x: number) {
     return t * t * (3 - 2 * t);
 }
 
-/* ============================================================
-   GEOMETRY BUILD
-   ============================================================ */
-
 function buildVariant(
     template: THREE.BufferAttribute,
     displace: (vertex: THREE.Vector3) => THREE.Vector3,
@@ -294,10 +286,6 @@ function buildGraniteGeometry() {
 
     return geometry;
 }
-
-/* ============================================================
-   MEDIA QUERIES
-   ============================================================ */
 
 function subscribeToMedia(query: string) {
     return (callback: () => void) => {
@@ -403,10 +391,6 @@ varying vec3 vObjPos;
 varying vec3 vObjNrm;
 varying mat3 vObjToView;
 `;
-
-/* ============================================================
-   STONE
-   ============================================================ */
 
 function Boulder({ progress }: { progress: MutableRefObject<number> }) {
     const groupRef = useRef<THREE.Group>(null);
@@ -806,10 +790,6 @@ function StudioEnvironment() {
         </Environment>
     );
 }
-
-/* ============================================================
-   ROOT
-   ============================================================ */
 
 export default function GraniteStone({
                                          progress,

@@ -18,10 +18,11 @@ export default function ContactInfo() {
                         </span>
 
                         <a
-                            href="tel:238605754"
+                            href="tel:+351238605754"
+                            aria-label="Ligar para o número de telefone 238 605 754"
                             className="mt-4 block font-display text-2xl transition-colors hover:text-stone md:text-3xl"
                         >
-                            238605754
+                            238 605 754
                         </a>
                     </div>
 

@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function ContactosPage() {
     return (
-        <main className="bg-brand-gradient text-graphite">
+        <main className="text-graphite">
             <Navbar />
             <ContactHero />
             <ContactInfo />
