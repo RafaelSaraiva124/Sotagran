@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import type { MouseEvent } from "react";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -11,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/theme-toggle";
 
 const LINKS = [
   { label: "Catálogo", href: "/#materials" },
@@ -21,10 +23,23 @@ const LINKS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 mix-blend-difference">
       <nav className="flex items-center justify-between px-6 md:px-16 h-20 text-quartz">
-        <Link href="/" className="group font-display text-lg tracking-[0.2em]">
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="group font-display text-lg tracking-[0.2em]"
+        >
             <Image
                 src="/logo completo branco sem linha.svg"
                 alt="Sotragran"
@@ -45,12 +60,16 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <Link
-          href="/contactos"
-          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "hidden md:inline-flex")}
-        >
-          Contact
-        </Link>
+        <div className="hidden items-center gap-4 md:flex">
+          <ThemeToggle />
+
+          <Link
+            href="/contactos"
+            className="inline-flex h-8 items-center rounded-lg border border-current px-3 font-mono text-[11px] uppercase tracking-widest2 transition-colors hover:text-copper"
+          >
+            Contact
+          </Link>
+        </div>
 
         <Sheet>
           <SheetTrigger
@@ -76,6 +95,11 @@ export default function Navbar() {
                   {link.label}
                 </SheetClose>
               ))}
+
+              <ThemeToggle
+                showLabel
+                className="border-b border-graphite/15 py-4 font-mono text-sm uppercase tracking-[0.2em] text-quartz"
+              />
 
               <SheetClose
                 render={<Link href="/contactos" />}

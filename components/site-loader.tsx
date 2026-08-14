@@ -73,10 +73,13 @@ export default function SiteLoader() {
             window.addEventListener("load", finish);
         }
 
+        window.addEventListener("granite-stone:ready", finish);
+
         return () => {
             window.cancelAnimationFrame(raf);
             window.clearTimeout(maxTimer);
             window.removeEventListener("load", finish);
+            window.removeEventListener("granite-stone:ready", finish);
             document.documentElement.style.overflow = "";
         };
     }, [reducedMotion]);

@@ -28,10 +28,50 @@ const plexMono = IBM_Plex_Mono({
     display: "swap",
 });
 
+const SITE_URL = "https://www.sotragran.com";
+const SITE_NAME = "Sotragran";
+const SITE_TITLE = "Sotragran — Pedra Natural Desde 1990";
+const SITE_DESCRIPTION =
+    "A Sotragran transforma e comercializa granito, mármore e quartzito desde 1990, em Oliveira do Hospital. Da pedreira à arquitetura — bancadas, revestimentos e soluções em pedra natural.";
+
 export const metadata: Metadata = {
-    title: "Sotragran — Stone Shaped by Nature",
-    description:
-        "Granite, marble and quartzite from quarry to architecture. Explore the Sotragran material collection.",
+    metadataBase: new URL(SITE_URL),
+    title: {
+        default: SITE_TITLE,
+        template: `%s | ${SITE_NAME}`,
+    },
+    description: SITE_DESCRIPTION,
+    keywords: [
+        "Sotragran",
+        "pedra natural",
+        "granito",
+        "mármore",
+        "quartzito",
+        "Oliveira do Hospital",
+        "bancadas de granito",
+        "revestimentos em pedra",
+    ],
+    authors: [{ name: SITE_NAME }],
+    robots: {
+        index: true,
+        follow: true,
+    },
+    alternates: {
+        canonical: "/",
+    },
+    openGraph: {
+        type: "website",
+        locale: "pt_PT",
+        url: SITE_URL,
+        siteName: SITE_NAME,
+        title: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+    },
 };
 
 export default function RootLayout({
@@ -41,7 +81,8 @@ export default function RootLayout({
 }) {
     return (
         <html
-            lang="en"
+            lang="pt-PT"
+            suppressHydrationWarning
             className={cn(
                 "font-sans",
                 geist.variable,
@@ -50,6 +91,13 @@ export default function RootLayout({
                 plexMono.variable,
             )}
         >
+        <head>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `try{if(localStorage.getItem("sotragran-theme")==="light"){document.documentElement.classList.add("light")}}catch(e){}`,
+                }}
+            />
+        </head>
         <body>
         <SiteLoader />
         {children}

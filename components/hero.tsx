@@ -4,8 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "@/lib/utils";
 import {
     ARRIVE_END,
     INTRO_END,
@@ -16,9 +15,8 @@ import {
     phaseOpacity,
     photoOpacityAt,
     remap,
+    smoothstep,
 } from "@/lib/hero-story";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const GraniteStone = dynamic(() => import("./granite-stone"), {
     ssr: false,
@@ -63,66 +61,88 @@ export default function Hero() {
             return;
         }
 
+        let cancelled = false;
+        let ctx: { revert: () => void } | undefined;
+
         (window as unknown as { __heroDebug?: unknown }).__heroDebug = "effect-started";
 
-        const ctx = gsap.context(() => {
-          try {
-            const st = ScrollTrigger.create({
-                trigger: rootRef.current,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true,
-                onUpdate: (self) => {
-                    const p = self.progress;
-                    progressRef.current = p;
-                    console.log("[hero-debug] onUpdate", p, self.start, self.end);
+        (async () => {
+            const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+                import("gsap"),
+                import("gsap/ScrollTrigger"),
+            ]);
 
-                    gsap.set("#scroll-indicator", {
-                        opacity: 1 - remap(p, 0, SCROLL_INDICATOR_END),
-                    });
+            if (cancelled) {
+                return;
+            }
 
-                    const introT = remap(p, INTRO_FADE_START, INTRO_END);
-                    gsap.set("#hero-copy", {
-                        opacity: 1 - introT,
-                        y: -80 * introT,
-                        scale: 1 - 0.2 * introT,
-                    });
+            gsap.registerPlugin(ScrollTrigger);
 
-                    PHASES.forEach((phase) => {
-                        gsap.set(`#phase-${phase.id}`, {
-                            opacity: phaseOpacity(p, phase),
-                            y: phaseOffsetY(p, phase),
+            ctx = gsap.context(() => {
+              try {
+                const st = ScrollTrigger.create({
+                    trigger: rootRef.current,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const p = self.progress;
+                        progressRef.current = p;
+                        console.log("[hero-debug] onUpdate", p, self.start, self.end);
+
+                        gsap.set("#scroll-indicator", {
+                            opacity: 1 - remap(p, 0, SCROLL_INDICATOR_END),
                         });
-                    });
 
-                    const photoT = photoOpacityAt(p);
-                    gsap.set("#granite-texture", { opacity: photoT });
-                    gsap.set("#granite-texture img", { scale: 1.12 - 0.12 * photoT });
+                        const introT = remap(p, INTRO_FADE_START, INTRO_END);
+                        gsap.set("#hero-copy", {
+                            opacity: 1 - introT,
+                            y: -80 * introT,
+                            scale: 1 - 0.2 * introT,
+                        });
 
-                    gsap.set("#granite-3d", { opacity: outroOpacityAt(p) });
+                        PHASES.forEach((phase) => {
+                            gsap.set(`#phase-${phase.id}`, {
+                                opacity: phaseOpacity(p, phase),
+                                y: phaseOffsetY(p, phase),
+                            });
+                        });
 
-                    const captionT = remap(p, ARRIVE_END, 1);
-                    gsap.set("#material-intro", {
-                        opacity: captionT,
-                        y: 50 - 50 * captionT,
-                    });
-                },
-            });
+                        const photoT = photoOpacityAt(p);
+                        gsap.set("#granite-texture", { opacity: photoT });
+                        gsap.set("#granite-texture img", { scale: 1.12 - 0.12 * photoT });
 
-            (window as unknown as { __heroDebug?: unknown }).__heroDebug = {
-                start: st.start,
-                end: st.end,
-                triggerTag: st.trigger?.tagName,
-                triggerId: (st.trigger as HTMLElement | undefined)?.id,
-            };
-          } catch (err) {
-            (window as unknown as { __heroDebug?: unknown }).__heroDebug = {
-                error: String(err),
-            };
-          }
-        }, rootRef);
+                        gsap.set("#granite-3d", { opacity: outroOpacityAt(p) });
 
-        return () => ctx.revert();
+                        const fogT = 1 - smoothstep(remap(p, 0, PHASES[0].enter));
+                        gsap.set("#granite-fade", { opacity: fogT });
+
+                        const captionT = remap(p, ARRIVE_END, 1);
+                        gsap.set("#material-intro", {
+                            opacity: captionT,
+                            y: 50 - 50 * captionT,
+                        });
+                    },
+                });
+
+                (window as unknown as { __heroDebug?: unknown }).__heroDebug = {
+                    start: st.start,
+                    end: st.end,
+                    triggerTag: st.trigger?.tagName,
+                    triggerId: (st.trigger as HTMLElement | undefined)?.id,
+                };
+              } catch (err) {
+                (window as unknown as { __heroDebug?: unknown }).__heroDebug = {
+                    error: String(err),
+                };
+              }
+            }, rootRef);
+        })();
+
+        return () => {
+            cancelled = true;
+            ctx?.revert();
+        };
     }, [reducedMotion]);
 
     if (reducedMotion) {
@@ -183,6 +203,11 @@ export default function Hero() {
                 </div>
 
                 <div
+                    id="granite-fade"
+                    className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-2/3 bg-gradient-to-b from-hero-fade via-hero-fade/40 to-transparent"
+                />
+
+                <div
                     id="granite-texture"
                     className="pointer-events-none absolute inset-0 z-10 overflow-hidden opacity-0 will-change-transform"
                 >
@@ -190,7 +215,6 @@ export default function Hero() {
                         src="/media/materials/img.jpg"
                         alt=""
                         fill
-                        priority
                         sizes="120vw"
                         className="object-cover will-change-transform"
                     />
@@ -206,7 +230,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="survey-label mb-6 text-warm-white mix-blend-difference"
+                        className="survey-label mb-6 text-hero-title text-shadow-lg"
                     >
                         PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </motion.span>
@@ -215,11 +239,11 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.35 }}
-                        className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white text-shadow-lg md:text-[8vw]"
+                        className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-hero-title text-shadow-lg md:text-[8vw]"
                     >
                         NASCIDA
                         <br />
-                        <span className="font-display italic text-stone text-shadow-lg ">
+                        <span className="font-display italic text-hero-title-accent text-shadow-lg ">
         para permanecer.
     </span>
                     </motion.h1>
@@ -242,15 +266,30 @@ export default function Hero() {
                         className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-end px-6 pb-28 opacity-0 md:justify-center md:px-16 md:pb-0"
                     >
                         <div className="max-w-xl text-left md:max-w-[46%]">
-                            <span className="survey-label mb-5 text-warm-white/70">
+                            <span
+                                className={cn(
+                                    "survey-label mb-5",
+                                    phase.id === "applied" ? "text-hero-white/70" : "text-warm-white/70",
+                                )}
+                            >
                                 {phase.eyebrow}
                             </span>
 
-                            <h2 className="font-display text-[9vw] leading-[0.9] tracking-[-0.03em] text-warm-white md:text-[4.5vw]">
+                            <h2
+                                className={cn(
+                                    "font-display text-[9vw] leading-[0.9] tracking-[-0.03em] md:text-[4.5vw]",
+                                    phase.id === "applied" ? "text-hero-white" : "text-warm-white",
+                                )}
+                            >
                                 {phase.title}
                             </h2>
 
-                            <p className="mt-6 max-w-md text-sm text-warm-white/70 md:text-base">
+                            <p
+                                className={cn(
+                                    "mt-6 max-w-md text-sm md:text-base",
+                                    phase.id === "applied" ? "text-hero-white/70" : "text-warm-white/70",
+                                )}
+                            >
                                 {phase.body}
                             </p>
                         </div>
@@ -275,11 +314,11 @@ export default function Hero() {
                     className="pointer-events-none absolute inset-x-0 bottom-12 z-30 flex justify-center text-center opacity-0"
                 >
                     <div>
-                    <span className="survey-label text-warm-white/70">
+                    <span className="survey-label text-hero-white/70">
                          PEDRA NATURAL
                         </span>
 
-                        <p className="mt-3 font-mono text-xs uppercase tracking-[0.25em] text-warm-white">
+                        <p className="mt-3 font-mono text-xs uppercase tracking-[0.25em] text-hero-white">
                             Oliveira do Hospital · Portugal
                         </p>
                     </div>

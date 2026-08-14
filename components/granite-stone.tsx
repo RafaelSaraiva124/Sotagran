@@ -405,8 +405,8 @@ function Boulder({ progress }: { progress: MutableRefObject<number> }) {
     const geometry = useMemo(() => buildGraniteGeometry(), []);
 
     const [rawTexture, rawDetailTexture] = useLoader(THREE.TextureLoader, [
-        "/media/materials/granite-black.jpg",
-        "/media/materials/granite-black2.jpg",
+        "/media/materials/granite-black.webp",
+        "/media/materials/granite-black2.webp",
     ]);
 
     const maxAnisotropy = useMemo(() => gl.capabilities.getMaxAnisotropy(), [gl]);
@@ -563,6 +563,10 @@ function Boulder({ progress }: { progress: MutableRefObject<number> }) {
     }, [geometry]);
 
     useEffect(() => {
+        window.dispatchEvent(new Event("granite-stone:ready"));
+    }, []);
+
+    useEffect(() => {
         return () => {
             geometry.dispose();
             material.dispose();
@@ -650,7 +654,7 @@ const KEY_LIGHT_INTENSITY = 1.35;
 const RIM_LIGHT_INTENSITY = 1.1;
 const ENV_INTENSITY = 1.0;
 
-const INTRO_DIM_FACTOR = 0.35;
+const INTRO_DIM_FACTOR = 0.65;
 
 function Lighting({ progress }: { progress: MutableRefObject<number> }) {
     const ambientRef = useRef<THREE.AmbientLight>(null);

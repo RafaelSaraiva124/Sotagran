@@ -126,6 +126,18 @@ export default function Footer() {
                         </span>
                     </div>
 
+                    <span>
+                        Desenvolvido por{" "}
+                        <a
+                            href="https://portfolio.g0dr.pt"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-colors hover:text-stone"
+                        >
+                            Rafael Saraiva
+                        </a>
+                    </span>
+
                 </div>
 
             </div>
