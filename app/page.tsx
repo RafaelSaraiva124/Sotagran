@@ -8,7 +8,7 @@ import Aboutus from "@/components/aboutus";
 
 export default function Home() {
     return (
-        <main className="overflow-x-clip">
+        <main className="bg-brand-gradient overflow-x-clip">
             <Navbar />
             <Hero />
             <Aboutus/>

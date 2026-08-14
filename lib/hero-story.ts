@@ -20,8 +20,8 @@ export type StonePose = { fracX: number; fracY: number; scale: number };
 
 
 export const LAYOUT_POSE: { intro: StonePose; end: StonePose } = {
-    intro: { fracX: 0.5, fracY: 0.42, scale: 0.6 },
-    end: { fracX: 0.76, fracY: 0.46, scale: 0.85 },
+    intro: { fracX: 0.5, fracY: 0.42, scale: 0.5 },
+    end: { fracX: 0.76, fracY: 0.46, scale: 0.72 },
 };
 
 

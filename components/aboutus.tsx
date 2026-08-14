@@ -6,7 +6,7 @@ export default function Aboutus() {
     return (
         <section
             id="about"
-            className="bg-quarry px-6 pt-28 text-graphite md:px-16 md:pt-36"
+            className="px-6 pt-28 text-graphite md:px-16 md:pt-36"
         >
             <div className="mx-auto max-w-7xl">
 

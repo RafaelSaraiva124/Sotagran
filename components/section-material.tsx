@@ -228,7 +228,7 @@ export default function SectionMaterial() {
     return (
         <section
             id="materials"
-            className="bg-quarry px-6 py-28 text-graphite md:px-16 md:py-36"
+            className="px-6 py-28 text-graphite md:px-16 md:py-36"
         >
             <div className="mx-auto max-w-7xl">
 
@@ -278,7 +278,7 @@ export default function SectionMaterial() {
                             <h3 className="mt-3 font-display text-3xl md:text-5xl">
                                 Granitos{" "}
                                 <span className="italic text-stone">
-                                    nacionais
+                                    Nacionais
                                 </span>
                             </h3>
                         </div>
@@ -313,7 +313,7 @@ export default function SectionMaterial() {
                             <h3 className="mt-3 font-display text-3xl md:text-5xl">
                                 Granitos{" "}
                                 <span className="italic text-stone">
-                                    estrangeiros
+                                    Estrangeiros
                                 </span>
                             </h3>
                         </div>

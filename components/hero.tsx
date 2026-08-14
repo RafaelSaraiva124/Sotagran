@@ -127,13 +127,13 @@ export default function Hero() {
 
     if (reducedMotion) {
         return (
-            <section id="hero-story" className="relative bg-quarry">
-                <div className="flex flex-col items-center justify-center px-6 py-28 text-center">
+            <section id="hero-story" className="relative">
+                <div className="flex flex-col items-center justify-center px-6 py-28 text-center md:px-16">
                     <span className="survey-label mb-6 text-warm-white">
                            PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </span>
                     <h1 className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white md:text-[8vw]">
-                        Nascida
+                        NASCIDA
                         <br />
                         <span className="font-display italic text-stone text-shadow-lg">
                                 para permanecer.
@@ -172,7 +172,7 @@ export default function Hero() {
         <section
             ref={rootRef}
             id="hero-story"
-            className="relative h-[420vh] bg-quarry"
+            className="relative h-[420vh]"
         >
             <div className="sticky top-0 h-[100svh] overflow-hidden">
                 <div
@@ -217,7 +217,7 @@ export default function Hero() {
                         transition={{ duration: 1, delay: 0.35 }}
                         className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white text-shadow-lg md:text-[8vw]"
                     >
-                        Nascida
+                        NASCIDA
                         <br />
                         <span className="font-display italic text-stone text-shadow-lg ">
         para permanecer.

@@ -9,11 +9,11 @@ export default function Footer() {
                     TOP
                 ========================================= */}
 
-                <div className="grid gap-12 md:grid-cols-12">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-12 md:gap-12">
 
                     {/* BRAND */}
 
-                    <div className="md:col-span-5">
+                    <div className="col-span-2 md:col-span-5">
                         <span className="font-display text-2xl tracking-[0.18em] text-quartz">
                             SOTRAGRAN
                         </span>
@@ -30,7 +30,7 @@ export default function Footer() {
 
                     {/* NAVIGATION */}
 
-                    <div className="md:col-span-3 md:col-start-7">
+                    <div className="col-span-1 md:col-span-3 md:col-start-7">
                         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-quartz/35">
                             Navegação
                         </span>
@@ -45,14 +45,14 @@ export default function Footer() {
                             </Link>
 
                             <Link
-                                href="/sobre-nos"
+                                href="/#about"
                                 className="transition-colors hover:text-stone"
                             >
                                 Sobre nós
                             </Link>
 
                             <Link
-                                href="/materiais"
+                                href="/#materials"
                                 className="transition-colors hover:text-stone"
                             >
                                 Materiais
@@ -70,7 +70,7 @@ export default function Footer() {
 
                     {/* CONTACT */}
 
-                    <div className="md:col-span-3">
+                    <div className="col-span-1 md:col-span-3">
                         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-quartz/35">
                             Contacto
                         </span>

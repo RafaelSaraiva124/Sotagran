@@ -42,7 +42,7 @@ export default function StorySection({
       ref={ref}
       className={cn(
         "relative min-h-[90vh] w-full overflow-hidden flex items-center",
-        isDark ? "bg-basalt text-quartz" : "bg-quarry text-graphite",
+        isDark ? "bg-basalt text-quartz" : "text-graphite",
         className
       )}
     >
@@ -56,7 +56,7 @@ export default function StorySection({
 
       <motion.div
         style={{ opacity: textOpacity, y: textY }}
-        className="relative z-10 w-full px-6 md:px-16 py-24"
+        className="relative z-10 w-full px-6 py-24 md:px-16 md:py-32"
       >
         <div className="flex items-center gap-4 mb-6 survey-label">
           <span>{index}</span>

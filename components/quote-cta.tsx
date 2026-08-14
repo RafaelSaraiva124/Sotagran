@@ -4,7 +4,7 @@ export default function QuoteCta() {
     return (
         <section
             id="quote"
-            className="bg-quarry px-6 pb-28 text-graphite md:px-16 md:pb-36"
+            className="px-6 pb-28 text-graphite md:px-16 md:pb-36"
         >
             <div className="mx-auto max-w-7xl">
 

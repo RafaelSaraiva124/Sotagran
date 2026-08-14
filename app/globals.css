@@ -15,6 +15,8 @@
 
     --color-copper: #b8896b;
 
+    --brand-gradient: #121212;
+
     --font-display: var(--font-fraunces);
     --font-body: var(--font-inter);
     --font-mono: var(--font-plex-mono);
@@ -60,9 +62,10 @@ html {
 }
 
 body {
-    @apply bg-quarry text-graphite font-body antialiased;
+    @apply text-graphite font-body antialiased;
 
     margin: 0;
+    background: var(--brand-gradient);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -77,6 +80,10 @@ body {
 }
 
 @layer components {
+    .bg-brand-gradient {
+        background: var(--brand-gradient);
+    }
+
     .survey-label {
         @apply font-mono text-[11px] uppercase tracking-[0.25em] text-mica;
     }

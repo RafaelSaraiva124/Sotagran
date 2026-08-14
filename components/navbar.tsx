@@ -23,7 +23,7 @@ const LINKS = [
 export default function Navbar() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 mix-blend-difference">
-      <nav className="flex items-center justify-between px-6 md:px-10 h-20 text-quartz">
+      <nav className="flex items-center justify-between px-6 md:px-16 h-20 text-quartz">
         <Link href="/" className="group font-display text-lg tracking-[0.2em]">
             <Image
                 src="/logo completo branco sem linha.svg"
