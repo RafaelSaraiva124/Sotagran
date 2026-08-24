@@ -4,66 +4,18 @@ import { useState } from "react";
 import Link from "next/link";
 
 import ProjectCard from "./project-card";
-import ProjectDialog from "./project-dialog";
 
 import { Button } from "@/components/ui/button";
-
-const projects = [
-    {
-        id: "project-01",
-        number: "01",
-        title: "Projeto Residencial",
-        category: "Interiores",
-        location: "Portugal",
-        year: "2026",
-        image: "/media/projects/project-01.jpg",
-        description:
-            "Aplicação de pedra natural num projeto residencial, onde o material assume um papel central na identidade do espaço.",
-        materials: ["Granito", "Acabamento polido"],
-    },
-    {
-        id: "project-02",
-        number: "02",
-        title: "Projeto Residencial",
-        category: "Exteriores",
-        location: "Portugal",
-        year: "2026",
-        image: "/media/projects/project-02.jpg",
-        description:
-            "Uma solução em pedra natural pensada para integrar materialidade, resistência e expressão arquitetónica.",
-        materials: ["Granito", "Acabamento personalizado"],
-    },
-    {
-        id: "project-03",
-        number: "03",
-        title: "Espaço Interior",
-        category: "Interiores",
-        location: "Portugal",
-        year: "2026",
-        image: "/media/projects/project-03.jpg",
-        description:
-            "Pedra natural utilizada como elemento de destaque na construção de um espaço interior.",
-        materials: ["Granito", "Acabamento personalizado"],
-    },
-];
-
-const categories = [
-    "Todos",
-    "Interiores",
-    "Exteriores",
-];
+import { PROJECTS, PROJECT_CATEGORIES } from "@/lib/projects";
 
 export default function ProjectsShowcase() {
     const [activeCategory, setActiveCategory] =
         useState("Todos");
 
-    const [selectedProject, setSelectedProject] =
-        useState<(typeof projects)[number] | null>(null);
-
     const filteredProjects =
         activeCategory === "Todos"
-            ? projects
-            : projects.filter(
+            ? PROJECTS
+            : PROJECTS.filter(
                 (project) =>
                     project.category === activeCategory,
             );
@@ -81,7 +33,7 @@ export default function ProjectsShowcase() {
                 </div>
 
                 <div className="mb-14 flex flex-wrap gap-2">
-                    {categories.map((category) => (
+                    {PROJECT_CATEGORIES.map((category) => (
                         <Button
                             key={category}
                             variant={
@@ -105,7 +57,6 @@ export default function ProjectsShowcase() {
                         <ProjectCard
                             key={project.id}
                             project={project}
-                            onSelect={setSelectedProject}
                             priority={index < 3}
                         />
                     ))}
@@ -143,16 +94,6 @@ export default function ProjectsShowcase() {
                     </div>
 
                 </div>
-
-                <ProjectDialog
-                    project={selectedProject}
-                    open={selectedProject !== null}
-                    onOpenChange={(open) => {
-                        if (!open) {
-                            setSelectedProject(null);
-                        }
-                    }}
-                />
 
             </div>
         </section>

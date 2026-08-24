@@ -1,11 +1,15 @@
 import type { MetadataRoute } from "next";
 
+import { PROJECTS } from "@/lib/projects";
+
 const SITE_URL = "https://www.sotragran.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const routes = ["", "/projetos", "/contactos"];
 
-    return routes.map((route) => ({
+    const projectRoutes = PROJECTS.map((project) => `/projetos/${project.id}`);
+
+    return [...routes, ...projectRoutes].map((route) => ({
         url: `${SITE_URL}${route}`,
         lastModified: new Date(),
         changeFrequency: "monthly",
