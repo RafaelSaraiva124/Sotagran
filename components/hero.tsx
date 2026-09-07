@@ -15,7 +15,6 @@ import {
     phaseOpacity,
     photoOpacityAt,
     remap,
-    smoothstep,
 } from "@/lib/hero-story";
 
 const GraniteStone = dynamic(() => import("./granite-stone"), {
@@ -100,6 +99,9 @@ export default function Hero() {
                             y: -80 * introT,
                             scale: 1 - 0.2 * introT,
                         });
+                        gsap.set("#hero-bg-image", {
+                            opacity: 1 - introT,
+                        });
 
                         PHASES.forEach((phase) => {
                             gsap.set(`#phase-${phase.id}`, {
@@ -113,9 +115,6 @@ export default function Hero() {
                         gsap.set("#granite-texture img", { scale: 1.12 - 0.12 * photoT });
 
                         gsap.set("#granite-3d", { opacity: outroOpacityAt(p) });
-
-                        const fogT = 1 - smoothstep(remap(p, 0, PHASES[0].enter));
-                        gsap.set("#granite-fade", { opacity: fogT });
 
                         const captionT = remap(p, ARRIVE_END, 1);
                         gsap.set("#material-intro", {
@@ -148,14 +147,24 @@ export default function Hero() {
     if (reducedMotion) {
         return (
             <section id="hero-story" className="relative">
-                <div className="flex flex-col items-center justify-center px-6 py-28 text-center md:px-16">
-                    <span className="survey-label mb-6 text-warm-white">
+                <div className="relative flex flex-col items-center justify-center overflow-hidden px-6 py-28 text-center md:px-16">
+                    <Image
+                        src="/bg.jpg"
+                        alt=""
+                        fill
+                        priority
+                        sizes="100vw"
+                        className="-z-10 object-cover"
+                    />
+                    <div className="absolute inset-0 -z-10 bg-black/30" />
+
+                    <span className="survey-label mb-6 text-[#f3f1ec]">
                            PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </span>
-                    <h1 className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-warm-white md:text-[8vw]">
+                    <h1 className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-[#f3f1ec] md:text-[8vw]">
                         NASCIDA
                         <br />
-                        <span className="font-display italic text-stone text-shadow-lg">
+                        <span className="font-display italic text-[#d6d2c8] text-shadow-lg">
                                 para permanecer.
                         </span>
                     </h1>
@@ -196,16 +205,27 @@ export default function Hero() {
         >
             <div className="sticky top-0 h-[100svh] overflow-hidden">
                 <div
-                    id="granite-3d"
-                    className="absolute inset-0 z-0"
+                    id="hero-bg-image"
+                    className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
                 >
-                    <GraniteStone progress={progressRef} />
+                    <Image
+                        src="/bg.jpg"
+                        alt=""
+                        fill
+                        priority
+                        sizes="100vw"
+                        className="object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-black/30" />
                 </div>
 
                 <div
-                    id="granite-fade"
-                    className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-2/3 bg-gradient-to-b from-hero-fade via-hero-fade/40 to-transparent"
-                />
+                    id="granite-3d"
+                    className="absolute inset-0 z-[1]"
+                >
+                    <GraniteStone progress={progressRef} />
+                </div>
 
                 <div
                     id="granite-texture"
@@ -230,7 +250,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="survey-label mb-6 text-hero-title text-shadow-lg"
+                        className="survey-label mb-6 text-[#ffffff] text-shadow-lg"
                     >
                         PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
                     </motion.span>
@@ -239,11 +259,11 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.35 }}
-                        className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-hero-title text-shadow-lg md:text-[8vw]"
+                        className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-[#ffffff] text-shadow-lg md:text-[8vw]"
                     >
                         NASCIDA
                         <br />
-                        <span className="font-display italic text-hero-title-accent text-shadow-lg ">
+                        <span className="font-display italic text-[#d6d2c8] text-shadow-lg ">
         para permanecer.
     </span>
                     </motion.h1>
@@ -253,7 +273,7 @@ export default function Hero() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.8 }}
                         href="#materials"
-                        className="pointer-events-auto mt-12 border-b border-warm-white/40 pt-15 pb-2 font-mono text-xs uppercase tracking-[0.25em] text-warm-white transition-colors hover:border-stone hover:text-stone"
+                        className="pointer-events-auto mt-12 border-b border-[#f3f1ec]/40 pt-15 pb-2 font-mono text-xs uppercase tracking-[0.25em] text-[#f3f1ec] transition-colors hover:border-[#d6d2c8] hover:text-[#d6d2c8]"
                     >
                         Ver Catálogo
                     </motion.a>
@@ -300,7 +320,7 @@ export default function Hero() {
                     id="scroll-indicator"
                     className="absolute bottom-8 left-1/2 z-30 -translate-x-1/2"
                 >
-                    <div className="flex flex-col items-center gap-3 text-warm-white/60">
+                    <div className="flex flex-col items-center gap-3 text-[#f3f1ec]/60">
                         <span className="font-mono text-[9px] uppercase tracking-[0.3em]">
                             Deslize
                         </span>
