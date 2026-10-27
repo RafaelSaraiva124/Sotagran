@@ -15,16 +15,16 @@ export default function Footer() {
 
                     <div className="col-span-2 md:col-span-5">
                         <span className="font-display text-2xl tracking-[0.18em] text-quartz">
-                            SOTRAGRAN
+                            SERRAGRAN
                         </span>
 
                         <p className="mt-5 max-w-sm font-body text-sm leading-relaxed text-quartz/50">
                             Transformação e comercialização de
-                            pedra natural desde 1990.
+                            pedra natural desde 1988.
                         </p>
 
                         <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.25em] text-quartz/35">
-                            Oliveira do Hospital · Portugal
+                            Vila Nova de Poiares · Portugal
                         </p>
                     </div>
 
@@ -78,10 +78,10 @@ export default function Footer() {
                         <div className="mt-5 flex flex-col gap-3 font-mono text-[11px] uppercase tracking-[0.15em]">
 
                             <a
-                                href="mailto:geral@sotragran.com"
+                                href="mailto:geral@serragran.pt"
                                 className="transition-colors hover:text-stone"
                             >
-                                geral@sotragran.com
+                                geral@serragran.pt
                             </a>
 
                             <Link
@@ -109,7 +109,7 @@ export default function Footer() {
                 <div className="flex flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-quartz/30 md:flex-row md:items-center md:justify-between">
 
                     <span>
-                        © {new Date().getFullYear()} Sotragran
+                        © {new Date().getFullYear()} SerraGran
                     </span>
 
                     <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -118,7 +118,7 @@ export default function Footer() {
                         </span>
 
                         <span>
-                            Oliveira do Hospital
+                            Vila Nova de Poiares
                         </span>
 
                         <span>

@@ -36,11 +36,11 @@ export default function ContactHero() {
 
                 <div className="mt-6 flex items-center justify-between">
                     <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-graphite/40">
-                        Sotragran · Desde 1990
+                        SerraGran · Desde 1988
                     </span>
 
                     <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-graphite/40">
-                        Oliveira do Hospital · Portugal
+                        Vila Nova de Poiares · Portugal
                     </span>
                 </div>
 

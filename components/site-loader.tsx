@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import Image from "next/image";
 
 const EASE_DURATION_MS = 1600;
 const MAX_WAIT_MS = 4000;
@@ -96,14 +95,9 @@ export default function SiteLoader() {
             }`}
         >
             <div className="survey-rule relative p-8">
-                <Image
-                    src="/logo completo branco sem linha.svg"
-                    alt="Sotragran"
-                    width={220}
-                    height={45}
-                    priority
-                    className="h-9 w-auto"
-                />
+                <span className="font-display text-2xl tracking-[0.15em] text-quartz">
+                  SerraGran
+                </span>
             </div>
 
             <div className="flex w-40 flex-col items-center gap-3">
@@ -120,7 +114,7 @@ export default function SiteLoader() {
                 </div>
 
                 <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-graphite/50">
-                    Sotragran
+                    SerraGran
                 </span>
             </div>
         </div>

@@ -76,7 +76,7 @@ export default async function ProjectPage({
 
                             <Image
                                 src={project.image}
-                                alt={`${project.title} — Sotragran`}
+                                alt={`${project.title} — SerraGran`}
                                 fill
                                 priority
                                 sizes="(max-width: 768px) 100vw, 65vw"
@@ -103,7 +103,7 @@ export default async function ProjectPage({
 
                             <div>
                                 <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-graphite/40">
-                                    Sotragran · {project.number}
+                                    SerraGran · {project.number}
                                 </span>
 
                                 <h1 className="mt-5 font-display text-4xl leading-[0.92] tracking-[-0.03em] wrap-anywhere md:text-5xl lg:text-6xl">

@@ -159,7 +159,7 @@ export default function Hero() {
                     <div className="absolute inset-0 -z-10 bg-black/30" />
 
                     <span className="survey-label mb-6 text-[#f3f1ec]">
-                           PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
+                           PEDRA NATURAL · VILA NOVA DE POIARES · DESDE 1988
                     </span>
                     <h1 className="max-w-6xl text-[15vw] leading-[0.82] tracking-[-0.05em] text-[#f3f1ec] md:text-[8vw]">
                         NASCIDA
@@ -252,7 +252,7 @@ export default function Hero() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="survey-label mb-6 text-[#ffffff] text-shadow-lg"
                     >
-                        PEDRA NATURAL · OLIVEIRA DO HOSPITAL · DESDE 1990
+                        PEDRA NATURAL · VILA NOVA DE POIARES · DESDE 1988
                     </motion.span>
 
                     <motion.h1
@@ -339,7 +339,7 @@ export default function Hero() {
                         </span>
 
                         <p className="mt-3 font-mono text-xs uppercase tracking-[0.25em] text-hero-white">
-                            Oliveira do Hospital · Portugal
+                            Vila Nova de Poiares · Portugal
                         </p>
                     </div>
                 </div>

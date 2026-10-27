@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export const THEME_STORAGE_KEY = "sotragran-theme";
+export const THEME_STORAGE_KEY = "serragran-theme";
 
 type Theme = "light" | "dark";
 

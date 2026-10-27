@@ -30,7 +30,7 @@ export default function ProjectCard({
 
                         <Image
                             src={project.image}
-                            alt={`${project.title} — Sotragran`}
+                            alt={`${project.title} — SerraGran`}
                             fill
                             priority={priority}
                             sizes="(max-width: 768px) 92vw, (max-width: 1200px) 45vw, 30vw"

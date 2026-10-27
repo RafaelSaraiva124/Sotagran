@@ -28,11 +28,11 @@ const plexMono = IBM_Plex_Mono({
     display: "swap",
 });
 
-const SITE_URL = "https://www.sotragran.com";
-const SITE_NAME = "Sotragran";
-const SITE_TITLE = "Sotragran — Pedra Natural Desde 1990";
+const SITE_URL = "https://www.serragran.pt";
+const SITE_NAME = "SerraGran";
+const SITE_TITLE = "SerraGran — Pedra Natural Desde 1988";
 const SITE_DESCRIPTION =
-    "A Sotragran transforma e comercializa granito, mármore e quartzito desde 1990, em Oliveira do Hospital. Da pedreira à arquitetura — bancadas, revestimentos e soluções em pedra natural.";
+    "A SerraGran transforma e comercializa granito, mármore e quartzito desde 1988, em Vila Nova de Poiares. Da pedreira à arquitetura — bancadas, revestimentos e soluções em pedra natural.";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -42,12 +42,12 @@ export const metadata: Metadata = {
     },
     description: SITE_DESCRIPTION,
     keywords: [
-        "Sotragran",
+        "SerraGran",
         "pedra natural",
         "granito",
         "mármore",
         "quartzito",
-        "Oliveira do Hospital",
+        "Vila Nova de Poiares",
         "bancadas de granito",
         "revestimentos em pedra",
     ],
@@ -94,7 +94,7 @@ export default function RootLayout({
         <head>
             <script
                 dangerouslySetInnerHTML={{
-                    __html: `try{if(localStorage.getItem("sotragran-theme")==="light"){document.documentElement.classList.add("light")}}catch(e){}`,
+                    __html: `try{if(localStorage.getItem("serragran-theme")==="light"){document.documentElement.classList.add("light")}}catch(e){}`,
                 }}
             />
         </head>

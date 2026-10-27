@@ -18,11 +18,11 @@ export default function ContactInfo() {
                         </span>
 
                         <a
-                            href="tel:+351238605754"
-                            aria-label="Ligar para o número de telefone 238 605 754"
+                            href="tel:+351239123456"
+                            aria-label="Ligar para o número de telefone 239 123 456"
                             className="mt-4 block font-display text-2xl transition-colors hover:text-stone md:text-3xl"
                         >
-                            238 605 754
+                            239 123 456
                         </a>
                     </div>
 
@@ -33,10 +33,10 @@ export default function ContactInfo() {
                         </span>
 
                         <a
-                            href="mailto:geral@sotragran.com"
+                            href="mailto:geral@serragran.pt"
                             className="mt-4 block font-display text-2xl transition-colors hover:text-stone md:text-3xl"
                         >
-                            geral@sotragran.com
+                            geral@serragran.pt
                         </a>
                     </div>
 
@@ -47,9 +47,9 @@ export default function ContactInfo() {
                         </span>
 
                         <p className="mt-4 max-w-xs font-body leading-relaxed text-graphite/70">
-                            Zona Industrial, Lote 24D
+                            Zona Industrial, Lote 15
                             <br />
-                            3400-060 Oliveira do Hospital
+                            3350-123 Vila Nova de Poiares
                         </p>
                     </div>
 

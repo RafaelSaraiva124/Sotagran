@@ -35,8 +35,8 @@ export default function ContactMap() {
                     <div className="md:col-span-7">
                         <div className="relative aspect-[4/3] overflow-hidden bg-graphite/10 grayscale md:aspect-auto md:h-full">
                             <iframe
-                                title="Localização da Sotragran"
-                                src="https://www.openstreetmap.org/export/embed.html?bbox=-7.8443073%2C40.3572774%2C-7.8323073%2C40.3652774&layer=mapnik&marker=40.3612774%2C-7.8383073"
+                                title="Localização da SerraGran"
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=-8.2800%2C40.1900%2C-8.2200%2C40.2400&layer=mapnik&marker=40.2167%2C-8.2500"
                                 className="absolute inset-0 h-full w-full border-0"
                                 loading="lazy"
                             />
@@ -44,14 +44,14 @@ export default function ContactMap() {
 
                         <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                             <p className="max-w-sm font-body text-sm leading-relaxed text-graphite/65">
-                                Zona Industrial, Lote 24D — 3400-060
-                                Oliveira do Hospital, no centro de uma
+                                Zona Industrial, Lote 15 — 3350-123
+                                Vila Nova de Poiares, no centro de uma
                                 região com forte tradição na indústria
                                 da pedra.
                             </p>
 
                             <a
-                                href="https://www.google.com/maps/search/?api=1&query=Zona+Industrial%2C+Lote+24D%2C+3400-060+Oliveira+do+Hospital"
+                                href="https://www.google.com/maps/search/?api=1&query=Zona+Industrial%2C+Lote+15%2C+3350-123+Vila+Nova+de+Poiares"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="shrink-0 border-b border-graphite/40 pb-1 font-mono text-xs uppercase tracking-[0.2em] transition-colors hover:border-stone hover:text-stone"

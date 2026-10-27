@@ -6,7 +6,7 @@ export default function ProjectsHero() {
                 <div className="survey-label mb-8 flex items-center gap-4">
                     <span>PROJETOS</span>
                     <span className="h-px w-8 bg-current opacity-40" />
-                    <span>Sotragran</span>
+                    <span>SerraGran</span>
                 </div>
 
                 <div className="grid gap-12 md:grid-cols-12 md:items-end">
@@ -35,7 +35,7 @@ export default function ProjectsHero() {
 
                 <div className="mt-6 flex items-center justify-between">
                     <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-graphite/40">
-                        Sotragran · Projectos
+                        SerraGran · Projectos
                     </span>
 
                     <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-graphite/40">

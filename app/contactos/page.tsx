@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 
 const TITLE = "Contactos e Pedidos de Orçamento";
 const DESCRIPTION =
-    "Entre em contacto com a Sotragran para informações, pedidos de orçamento e soluções em granito, mármore e quartzito. Zona Industrial, Oliveira do Hospital, Portugal.";
+    "Entre em contacto com a SerraGran para informações, pedidos de orçamento e soluções em granito, mármore e quartzito. Zona Industrial, Vila Nova de Poiares, Portugal.";
 
 export const metadata: Metadata = {
     title: TITLE,

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -38,16 +37,9 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={handleLogoClick}
-          className="group font-display text-lg tracking-[0.2em]"
+          className="group font-display text-xl tracking-[0.15em] transition-transform duration-700 ease-out group-hover:scale-105"
         >
-            <Image
-                src="/logo completo branco sem linha.svg"
-                alt="Sotragran"
-                width={300}
-                height={62}
-                priority
-                className="h-8 w-auto transition-transform duration-700 ease-out group-hover:scale-105"
-            />
+          SerraGran
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-widest2">

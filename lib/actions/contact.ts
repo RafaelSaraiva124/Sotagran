@@ -46,7 +46,7 @@ export async function submitContactForm(
     const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
-        from: process.env.CONTACT_EMAIL_FROM ?? "Sotragran <onboarding@resend.dev>",
+        from: process.env.CONTACT_EMAIL_FROM ?? "SerraGran <onboarding@resend.dev>",
         to,
         replyTo: email,
         subject: `Novo pedido de contacto — ${name}`,

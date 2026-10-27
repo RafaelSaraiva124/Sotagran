@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 
 const TITLE = "Projetos";
 const DESCRIPTION =
-    "Projetos residenciais, arquitetónicos e de interiores com granito, mármore e quartzito da Sotragran. Da pedreira em Oliveira do Hospital até ao espaço final.";
+    "Projetos residenciais, arquitetónicos e de interiores com granito, mármore e quartzito da SerraGran. Da pedreira em Vila Nova de Poiares até ao espaço final.";
 
 export const metadata: Metadata = {
     title: TITLE,

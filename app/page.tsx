@@ -9,18 +9,18 @@ import Aboutus from "@/components/aboutus";
 
 export const metadata: Metadata = {
     title: {
-        absolute: "Sotragran — Pedra Natural Desde 1990",
+        absolute: "SerraGran — Pedra Natural Desde 1990",
     },
     description:
-        "Granito, mármore e quartzito trabalhados em Oliveira do Hospital desde 1990. Descubra a coleção de materiais Sotragran, da pedreira à arquitetura.",
+        "Granito, mármore e quartzito trabalhados em Vila Nova de Poiares desde 1990. Descubra a coleção de materiais SerraGran, da pedreira à arquitetura.",
     alternates: {
         canonical: "/",
     },
     openGraph: {
         url: "/",
-        title: "Sotragran — Pedra Natural Desde 1990",
+        title: "SerraGran — Pedra Natural Desde 1990",
         description:
-            "Granito, mármore e quartzito trabalhados em Oliveira do Hospital desde 1990. Descubra a coleção de materiais Sotragran, da pedreira à arquitetura.",
+            "Granito, mármore e quartzito trabalhados em Vila Nova de Poiares desde 1990. Descubra a coleção de materiais SerraGran, da pedreira à arquitetura.",
     },
 };
 

@@ -20,19 +20,19 @@ export default function Aboutus() {
 
                     <div className="md:col-span-7">
                         <h2 className="font-display text-5xl leading-[0.95] tracking-[-0.03em] md:text-7xl">
-                            Sotragran
+                            SerraGran
                             <br />
                             <span className="italic text-stone">
-                                desde 1990.
+                                desde 1988.
                             </span>
                         </h2>
                     </div>
 
                     <div className="md:col-span-4 md:col-start-9">
                         <p className="font-body text-base leading-relaxed text-graphite md:text-lg">
-                            A Sotragran é uma empresa dedicada à
+                            A SerraGran é uma empresa dedicada à
                             transformação e comercialização de pedra
-                            natural, com sede em Oliveira do Hospital.
+                            natural, com sede em Vila Nova de Poiares.
                         </p>
                     </div>
 
@@ -71,7 +71,7 @@ export default function Aboutus() {
                         </span>
 
                         <p className="mt-4 font-body leading-relaxed text-graphite">
-                            Oliveira do Hospital, no centro de uma
+                            Vila Nova de Poiares, no centro de uma
                             região com forte tradição na indústria
                             da pedra.
                         </p>
@@ -81,11 +81,11 @@ export default function Aboutus() {
 
                 <div className="mt-20 flex flex-col gap-3 border-t border-graphite/15 pt-6 md:flex-row md:items-center md:justify-between">
                     <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-graphite/50">
-                        SOTRAGRAN
+                        SERRAGRAN
                     </span>
 
                     <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-graphite/50">
-                        Pedra natural · Oliveira do Hospital · Portugal
+                        Pedra natural · Vila Nova de Poiares · Portugal
                     </span>
                 </div>
 
